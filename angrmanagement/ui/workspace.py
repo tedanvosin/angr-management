@@ -19,6 +19,7 @@ from angrmanagement.data.breakpoint import Breakpoint, BreakpointType
 from angrmanagement.data.instance import Instance, ObjectContainer
 from angrmanagement.data.jobs import (
     CFGGenerationJob,
+    DecompileAllJob,
     Job,
 )
 from angrmanagement.data.jobs.job import JobState
@@ -485,6 +486,29 @@ class Workspace:
         else:
             view = self._get_or_create_view("disassembly", DisassemblyView)
             view.decompile_current_function()
+
+    def decompile_all_functions(self) -> None:
+        """
+        Decompile all functions in the binary in sorted address order and switch
+        to decompiled view for the current function(if any).
+        """
+        if self.main_instance is None or self.main_instance.project.am_none:
+            return
+
+        current_function = None
+        current = self.view_manager.current_tab
+
+        if isinstance(current, DisassemblyView):
+            current_function = current.current_function.am_obj if current.current_function.am_obj else None
+        elif isinstance(current, CodeView):
+            current_function = current.function.am_obj if current.function.am_obj else None
+
+        def on_decompile_all_finish(result):
+            if current_function is not None:
+                self.decompile_function(current_function)
+
+        job = DecompileAllJob(self.main_instance, on_finish=on_decompile_all_finish)
+        self.job_manager.add_job(job)
 
     def view_data_dependency_graph(self, analysis_params: dict) -> None:
         view = self._get_or_create_view("data_dependency", DataDepView)

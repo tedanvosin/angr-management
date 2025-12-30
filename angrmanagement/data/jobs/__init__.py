@@ -4,6 +4,7 @@ from .calling_convention_recovery import CallingConventionRecoveryConfiguration,
 from .cfg_generation import CFGAnalysisConfiguration, CFGGenerationJob
 from .code_tagging import CodeTaggingConfiguration, CodeTaggingJob
 from .ddg_generation import DDGGenerationJob
+from .decompile_all import DecompileAllJob
 from .decompile_function import DecompileFunctionJob
 from .deobfuscation import (
     APIDeobfuscationConfiguration,
@@ -32,6 +33,7 @@ __all__ = [
     "CodeTaggingConfiguration",
     "CodeTaggingJob",
     "DDGGenerationJob",
+    "DecompileAllJob",
     "DecompileFunctionJob",
     "DependencyAnalysisJob",
     "FlirtAnalysisConfiguration",

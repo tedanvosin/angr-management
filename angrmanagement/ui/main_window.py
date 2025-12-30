@@ -464,6 +464,7 @@ class MainWindow(QMainWindow):
                 BasicCommand(action.__name__, caption, action)
                 for caption, action in [
                     ("Analyze: Decompile", self.decompile_current_function),
+                    ("Analyze: Decompile All", self.decompile_all_functions),
                     ("Analyze: Run Analysis...", self.run_analysis),
                     ("File: Exit", self.quit),
                     ("File: Load a new binary...", self.open_file_button),
@@ -768,6 +769,10 @@ class MainWindow(QMainWindow):
     def decompile_current_function(self) -> None:
         if self.workspace is not None:
             self.workspace.decompile_current_function()
+
+    def decompile_all_functions(self) -> None:
+        if self.workspace is not None:
+            self.workspace.decompile_all_functions()
 
     def view_proximity_for_current_function(self) -> None:
         if self.workspace is not None:

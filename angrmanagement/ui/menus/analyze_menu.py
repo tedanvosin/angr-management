@@ -32,6 +32,12 @@ class AnalyzeMenu(Menu):
                     icon=icon("pseudocode-view"),
                 ),
                 MenuEntry(
+                    "Decompile &All",
+                    main_window.decompile_all_functions,
+                    shortcut=QKeySequence("Shift+F5"),
+                    icon=icon("pseudocode-view"),
+                ),
+                MenuEntry(
                     "View in Proximity &Browser",
                     main_window.view_proximity_for_current_function,
                     shortcut=QKeySequence("Ctrl+B"),
