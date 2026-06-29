@@ -58,7 +58,6 @@ docs = [
 pyinstaller = [
   "pyinstaller~=6.19",
   "pillow;platform_system == \"Darwin\"",
-  "keystone-engine;platform_system != \"Linux\" or platform_machine != \"aarch64\"",
   "angr[unicorn]",
 ]
 testing = [
